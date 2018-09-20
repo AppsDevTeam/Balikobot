@@ -359,7 +359,8 @@ class Balikobot {
         OPTION_NOTE_DRIVER = 'note_driver', /*< note */
         OPTION_NOTE_CUSTOMER = 'note_recipient', /*< note for customer */
         OPTION_AGE = 'require_full_age', /*< taking delivery requires full age; boolean */
-        OPTION_PASSWORD = 'password'; /*< taking delivery requires password */
+        OPTION_PASSWORD = 'password', /*< taking delivery requires password */
+        OPTION_RETURN_TRACK = 'return_track'; /*< Option pro vracení trackovací adresy*/
 
     /**
      * CP shipper option services
@@ -1077,6 +1078,7 @@ class Balikobot {
                 self::OPTION_ORDER,
                 self::OPTION_BRANCH,
                 self::OPTION_WEIGHT,
+                self::OPTION_RETURN_TRACK
             ];
 
             case self::SHIPPER_INTIME: return [

@@ -1061,6 +1061,7 @@ class Balikobot {
                 self::OPTION_INSURANCE,
                 self::OPTION_PAY_BY_CUSTOMER,
                 self::OPTION_NOTE,
+                self::OPTION_RETURN_TRACK,
                 // palette
                 self::OPTION_MU_TYPE,
                 self::OPTION_PIECES,

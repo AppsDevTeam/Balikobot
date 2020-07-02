@@ -41,7 +41,8 @@ class Balikobot {
         SHIPPER_PPL = 'ppl', /*< PPL CZ s.r.o. */
         SHIPPER_TOPTRANS = 'toptrans', /*< TOPTRANS EU a.s. */
         SHIPPER_ULOZENKA = 'ulozenka', /*< Uloženka s.r.o. */
-        SHIPPER_ZASILKOVNA = 'zasilkovna'; /*< Zásilkovna s.r.o. */
+        SHIPPER_ZASILKOVNA = 'zasilkovna', /*< Zásilkovna s.r.o. */
+		SHIPPER_ZASILKOVNA_V2 = 'v2/zasilkovna'; /*< Zásilkovna s.r.o. */
 
     /**
      * Countries ISO 3166-1 alpha-2

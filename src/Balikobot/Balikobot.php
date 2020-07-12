@@ -1138,6 +1138,14 @@ class Balikobot {
                 self::OPTION_BRANCH,
                 self::OPTION_WEIGHT,
             ];
+
+            case self::SHIPPER_ZASILKOVNA_V2: return [
+                self::OPTION_PRICE,
+                self::OPTION_ORDER,
+                self::OPTION_BRANCH,
+                self::OPTION_WEIGHT,
+                self::OPTION_RETURN_TRACK
+            ];
         }
 
         return [];

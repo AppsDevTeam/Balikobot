@@ -703,13 +703,7 @@ class Balikobot
 		$this->clean();
 
 		if (!isset($response[0]['package_id'])) {
-			$flags =
-				JSON_UNESCAPED_UNICODE
-				| JSON_UNESCAPED_SLASHES
-				| JSON_PRETTY_PRINT
-				| (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0); // since PHP 5.6.6 & PECL JSON-C 1.3.7
-
-			throw new \UnexpectedValueException(\json_encode($response[0]['errors'], $flags), self::EXCEPTION_INVALID_REQUEST);
+			throw new \UnexpectedValueException(static::json_encode($response[0]['errors']));
 		}
 
 		return $response[0];
@@ -988,12 +982,14 @@ class Balikobot
 
 		$response = $this->call(self::REQUEST_LABELS, $shipper, ['package_ids' => $packages]);
 
-		if (isset($response['status']) && ($response['status'] != 200)) {
-			if ($response['status'] === 400) {
-				throw new \InvalidArgumentException('No more information.', self::EXCEPTION_INVALID_REQUEST);
-			} else {
-				throw new \UnexpectedValueException('Invalid data or invalid packages number.', self::EXCEPTION_INVALID_REQUEST);
-			}
+		if (!isset($response['status'])) {
+			throw new \UnexpectedValueException('Unexpected server response.');
+		}
+		elseif ($response['status'] == 406) {
+			throw new \UnexpectedValueException('Invalid package numbers.');
+		}
+		elseif ($response['status'] != 200) {
+			throw new \InvalidArgumentException(static::json_encode($response) . ', code: ' . $response['status']);
 		}
 
 		return $response['labels_url'];
@@ -1037,12 +1033,15 @@ class Balikobot
 
 		$response = $this->call(self::REQUEST_ORDER, $shipper, empty($packages) ? [] : ['package_ids' => $packages]);
 
-		if (!isset($response['status']))
-			throw new \UnexpectedValueException('Unexpected server response.', self::EXCEPTION_SERVER_ERROR);
-		if ($response['status'] == 406)
-			throw new \UnexpectedValueException('Invalid package numbers.', self::EXCEPTION_INVALID_REQUEST);
-		if ($response['status'] != 200)
-			throw new \UnexpectedValueException("Unexpected server response, code={$response['status']}.", self::EXCEPTION_SERVER_ERROR);
+		if (!isset($response['status'])) {
+			throw new \UnexpectedValueException('Unexpected server response.');
+		} 
+		elseif ($response['status'] == 406) {
+			throw new \UnexpectedValueException('Invalid package numbers.');
+		}
+		elseif ($response['status'] != 200) {
+			throw new \InvalidArgumentException(static::json_encode($response) . ', code: ' . $response['status']);
+		}
 
 		return $response;
 	}
@@ -1418,6 +1417,17 @@ class Balikobot
 			'shipper' => null,
 			'data' => [],
 		];
+	}
+
+	private static function json_encode($value)
+	{
+		$flags =
+			JSON_UNESCAPED_UNICODE
+			| JSON_UNESCAPED_SLASHES
+			| JSON_PRETTY_PRINT
+			| (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0); // since PHP 5.6.6 & PECL JSON-C 1.3.7
+
+		return \json_encode($value, $flags);
 	}
 
 }

@@ -361,7 +361,7 @@ class Balikobot {
         OPTION_NOTE_CUSTOMER = 'note_recipient', /*< note for customer */
         OPTION_AGE = 'require_full_age', /*< taking delivery requires full age; boolean */
         OPTION_PASSWORD = 'password', /*< taking delivery requires password */
-		OPTION_RETURN_FULL_ERRORS = 'return_full_errors', /* Pro navrácení chyb v textové podobě namísto standardních číselných kódů zašlete hodnotu „1“ nebo TRUE (boolean) */
+        OPTION_RETURN_FULL_ERRORS = 'return_full_errors', /* Pro navrácení chyb v textové podobě namísto standardních číselných kódů zašlete hodnotu „1“ nebo TRUE (boolean) */
         OPTION_RETURN_TRACK = 'return_track'; /*< Option pro vracení trackovací adresy*/
 
     /**
@@ -1051,7 +1051,7 @@ class Balikobot {
                 self::OPTION_ORDER,
                 self::OPTION_SERVICES,
                 self::OPTION_WEIGHT,
-				self::OPTION_RETURN_FULL_ERRORS,
+                self::OPTION_RETURN_FULL_ERRORS,
             ];
 
             case self::SHIPPER_DPD: return [
@@ -1090,7 +1090,7 @@ class Balikobot {
                 self::OPTION_BRANCH,
                 self::OPTION_WEIGHT,
                 self::OPTION_RETURN_TRACK,
-				self::OPTION_RETURN_FULL_ERRORS,
+                self::OPTION_RETURN_FULL_ERRORS,
             ];
 
             case self::SHIPPER_INTIME: return [
@@ -1155,7 +1155,7 @@ class Balikobot {
                 self::OPTION_BRANCH,
                 self::OPTION_WEIGHT,
                 self::OPTION_RETURN_TRACK,
-				self::OPTION_RETURN_FULL_ERRORS,
+                self::OPTION_RETURN_FULL_ERRORS,
             ];
         }
 

@@ -2,8 +2,6 @@
 
 namespace Merinsky\Balikobot;
 
-use Nette\Utils\Json;
-
 /**
  * @author Miroslav Merinsky <miroslav@merinsky.biz>
  * @version 1.0
@@ -700,14 +698,14 @@ class Balikobot {
         $this->clean();
 
         if (!isset($response[0]['package_id'])) {
-			$flags =
-				JSON_UNESCAPED_UNICODE
-				| JSON_UNESCAPED_SLASHES
-				| JSON_PRETTY_PRINT
-				| (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0); // since PHP 5.6.6 & PECL JSON-C 1.3.7
+                $flags =
+                        JSON_UNESCAPED_UNICODE
+                        | JSON_UNESCAPED_SLASHES
+                        | JSON_PRETTY_PRINT
+                        | (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0); // since PHP 5.6.6 & PECL JSON-C 1.3.7
 
-			throw new \InvalidArgumentException(\json_encode($response[0]['errors'], $flags), self::EXCEPTION_INVALID_REQUEST);
-		}
+                throw new \InvalidArgumentException(\json_encode($response[0]['errors'], $flags), self::EXCEPTION_INVALID_REQUEST);
+        }
 
         return $response[0];
     }

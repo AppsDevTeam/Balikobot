@@ -989,7 +989,7 @@ class Balikobot
 			throw new \UnexpectedValueException('Invalid package numbers.');
 		}
 		elseif ($response['status'] != 200) {
-			throw new \InvalidArgumentException(static::json_encode($response) . ', code: ' . $response['status']);
+			throw new \InvalidArgumentException(static::json_encode($response));
 		}
 
 		return $response['labels_url'];
@@ -1040,7 +1040,7 @@ class Balikobot
 			throw new \UnexpectedValueException('Invalid package numbers.');
 		}
 		elseif ($response['status'] != 200) {
-			throw new \InvalidArgumentException(static::json_encode($response) . ', code: ' . $response['status']);
+			throw new \InvalidArgumentException(static::json_encode($response));
 		}
 
 		return $response;

@@ -933,16 +933,22 @@ class Balikobot
 	 */
 	public function trackPackageLast($shipper, $carrierId)
 	{
+		if ($shipper === 'v2/zasilkovna') {
+			$shipper = 'zasilkovna';
+		}
+
 		if (empty($shipper) || !in_array($shipper, $this->getShippers()) || empty($carrierId))
 			throw new \InvalidArgumentException('Invalid argument has been entered.');
 
 		$response = $this->call(self::REQUEST_TRACKSTATUS, $shipper, ['id' => $carrierId]);
 
-		if (isset($response['status']) && ($response['status'] != 200))
-			throw new \UnexpectedValueException("Unexpected server response, code={$response['status']}.", self::EXCEPTION_SERVER_ERROR);
-		if (empty($response[0]))
-			throw new \UnexpectedValueException('Unexpected server response.', self::EXCEPTION_SERVER_ERROR);
-
+		if (!isset($response['status'])) {
+			throw new \UnexpectedValueException('Unexpected server response.');
+		}
+		elseif ($response['status'] != 200) {
+			throw new \InvalidArgumentException(static::json_encode($response));
+		}
+		
 		return $response[0];
 	}
 
@@ -1429,5 +1435,4 @@ class Balikobot
 
 		return \json_encode($value, $flags);
 	}
-
 }

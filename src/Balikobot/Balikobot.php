@@ -934,7 +934,7 @@ class Balikobot
 	public function trackPackageLast($shipper, $carrierId)
 	{
 		if ($shipper === 'v2/zasilkovna') {
-			$shipper = 'zasilkovna';
+			$shipper = 'zasilkovnaa';
 		}
 
 		if (empty($shipper) || !in_array($shipper, $this->getShippers()) || empty($carrierId))
@@ -942,11 +942,14 @@ class Balikobot
 
 		$response = $this->call(self::REQUEST_TRACKSTATUS, $shipper, ['id' => $carrierId]);
 
-		if (!isset($response['status'])) {
-			throw new \UnexpectedValueException('Unexpected server response.');
-		}
-		elseif ($response['status'] != 200) {
-			throw new \InvalidArgumentException(static::json_encode($response));
+		// pri uspechu nevraci atribut status, ale vraci status_id
+		if (!isset($response['status_id'])) {
+			if (!isset($response['status'])) {
+				throw new \UnexpectedValueException('Unexpected server response.');
+			}
+			else {
+				throw new \InvalidArgumentException(static::json_encode($response));
+			}
 		}
 		
 		return $response[0];

@@ -943,7 +943,7 @@ class Balikobot
 		$response = $this->call(self::REQUEST_TRACKSTATUS, $shipper, ['id' => $carrierId]);
 
 		// pri uspechu nevraci atribut status, ale vraci status_id
-		if (!isset($response['status_id'])) {
+		if (!isset($response[0]['status_id'])) {
 			if (!isset($response['status'])) {
 				throw new \UnexpectedValueException('Unexpected server response.');
 			}

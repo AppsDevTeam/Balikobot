@@ -934,7 +934,7 @@ class Balikobot
 	public function trackPackageLast($shipper, $carrierId)
 	{
 		if ($shipper === 'v2/zasilkovna') {
-			$shipper = 'zasilkovnaa';
+			$shipper = 'zasilkovna';
 		}
 
 		if (empty($shipper) || !in_array($shipper, $this->getShippers()) || empty($carrierId))

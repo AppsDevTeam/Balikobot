@@ -628,16 +628,6 @@ class Balikobot
 		if (!in_array($country, $this->getCountryCodes()))
 			throw new \InvalidArgumentException('Invalid country code has been entered.');
 
-		switch ($country) {
-			case self::COUNTRY_CZECHIA:
-				if (!preg_match('/^\d{5}$/', $zip))
-					throw new \InvalidArgumentException('Invalid zip code has been entered. Match XXXXX pattern.');
-				break;
-
-			default:
-				throw new \UnexpectedValueException("Validation method is not implemented for $country country.");
-		}
-
 		if (!preg_match('/^\+420\d{9}$/', $phone))
 			throw new \InvalidArgumentException('Invalid phone has been entered. Match +420YYYYYYYYY pattern.');
 

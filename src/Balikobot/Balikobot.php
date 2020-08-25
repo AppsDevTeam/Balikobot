@@ -627,10 +627,7 @@ class Balikobot
 			throw new \InvalidArgumentException('Invalid argument has been entered.');
 		if (!in_array($country, $this->getCountryCodes()))
 			throw new \InvalidArgumentException('Invalid country code has been entered.');
-
-		if (!preg_match('/^\+420\d{9}$/', $phone))
-			throw new \InvalidArgumentException('Invalid phone has been entered. Match +420YYYYYYYYY pattern.');
-
+		
 		$this->data['data']['rec_name'] = $name;
 		$this->data['data']['rec_street'] = $street;
 		$this->data['data']['rec_city'] = $city;
